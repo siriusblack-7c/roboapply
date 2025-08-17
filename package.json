@@ -21,6 +21,7 @@
     "@tailwindcss/forms": "^0.5.9",
     "antd": "^5.26.2",
     "axios": "^1.7.7",
+    "caniuse-lite": "^1.0.30001735",
     "chart.js": "^4.4.7",
     "countries-list": "^3.1.1",
     "date-fns": "^4.1.0",
