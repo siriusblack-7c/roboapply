@@ -6,6 +6,11 @@ import analyticsIcon from "../assets/dashboardIcons/AnalyticsIcon.svg"
 import coverletterIcon from "../assets/dashboardIcons/coverLetterIcon.svg"
 import resumeScoreIcon from "../assets/dashboardIcons/resumeScoreIcon.svg"
 import interviewGuide from "../assets/dashboardIcons/interviewGuide.svg"
+import LiveInterview from "../assets/dashboardIcons/LiveInterview.svg"
+import AddYourPosition from "../assets/dashboardIcons/AddYourPosition.svg"
+import AddYourResume from "../assets/dashboardIcons/AddYourResume.svg"
+import AIInterviewCopilot from "../assets/dashboardIcons/AIInterviewCopilot.svg"
+
 import aiscore from "../assets/dashboardIcons/aiscore.svg"
 import sidebarContactUs from "../assets/logo.svg"
 import { VscLayoutSidebarRight } from "react-icons/vsc"
@@ -19,6 +24,12 @@ const DashboardSidebar = () => {
   const [isSidebarCollapsed, setSidebarCollapsed] = useState(
     () => JSON.parse(localStorage.getItem("isSidebarCollapsed")) || false
   )
+
+  const [isCopilotVisible, setIsCopilotVisible] = useState(() =>
+  ["/live-interview", "/add-your-resume", "/add-your-position"].some((path) =>
+    location.pathname.startsWith(path)
+  )
+)
 
   useEffect(() => {
     localStorage.setItem(
@@ -35,6 +46,17 @@ const DashboardSidebar = () => {
         location.pathname.startsWith(`${normalizedPath}/`)
       )
     })
+
+
+  const handleCopilotClick = () => {
+    setIsCopilotVisible((prev) => !prev)   // toggle visibility
+  }
+  
+  const isCopilotRouteActive = isActive([
+    "/live-interview",
+    "/add-your-resume",
+    "/add-your-position"
+  ])
 
   const styles = {
     active:
@@ -189,6 +211,93 @@ const DashboardSidebar = () => {
             <span className="ml-2">AI Interview Guide</span>
           )}
         </Link>
+
+        <Link
+          to="/live-interview"
+          onClick={handleCopilotClick} // ensure submenu opens
+          className={`${
+            isCopilotVisible || isCopilotRouteActive ? "bg-gray-700" : ""
+          } flex items-center p-3 rounded-lg`}>
+          <img
+            src={AIInterviewCopilot}
+            className="w-5 h-5"
+            alt="AI Interview Copilot"
+            loading="lazy"
+          />
+          <p className="pl-2">AI Interview Copilot</p>
+        </Link>
+
+        {isCopilotVisible ? (
+          <div className="border-l-2 border-[#676767] p-4">
+            <Link
+              to="/live-interview"
+              className={`flex items-center w-10 ${
+                isActive(["/live-interview"])
+                  ? isSidebarCollapsed
+                    ? "bg-gradient-to-b from-[#AF63FB] to-[#8C20F8] p-3 rounded-full"
+                    : styles.active
+                  : isSidebarCollapsed
+                  ? "hover:bg-gray-700 p-3 rounded-full"
+                  : styles.inactive
+              }`}>
+              <img
+                src={LiveInterview}
+                className="w-5 h-5"
+                alt="Interview Guide"
+                loading="lazy"
+              />
+              {!isSidebarCollapsed && (
+                <span className="ml-2">Live Interview</span>
+              )}
+            </Link>
+
+            <Link
+              to="/add-your-resume"
+              className={`flex items-center w-10 ${
+                isActive(["/add-your-resume"])
+                  ? isSidebarCollapsed
+                    ? "bg-gradient-to-b from-[#AF63FB] to-[#8C20F8] p-3 rounded-full"
+                    : styles.active
+                  : isSidebarCollapsed
+                  ? "hover:bg-gray-700 p-3 rounded-full"
+                  : styles.inactive
+              }`}>
+              <img
+                src={AddYourResume}
+                className="w-5 h-5"
+                alt="Interview Guide"
+                loading="lazy"
+              />
+              {!isSidebarCollapsed && (
+                <span className="ml-2">Add Your Resume</span>
+              )}
+            </Link>
+
+            <Link
+              to="/add-your-position"
+              className={`flex items-center w-10 ${
+                isActive(["/add-your-position"])
+                  ? isSidebarCollapsed
+                    ? "bg-gradient-to-b from-[#AF63FB] to-[#8C20F8] p-3 rounded-full"
+                    : styles.active
+                  : isSidebarCollapsed
+                  ? "hover:bg-gray-700 p-3 rounded-full"
+                  : styles.inactive
+              }`}>
+              <img
+                src={AddYourPosition}
+                className="w-5 h-5"
+                alt="Interview Guide"
+                loading="lazy"
+              />
+              {!isSidebarCollapsed && (
+                <span className="ml-2">Add Your Position</span>
+              )}
+            </Link>
+          </div>
+        ) : (
+          <></>
+        )}
 
         <Link
           to="/scan"

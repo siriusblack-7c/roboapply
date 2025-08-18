@@ -10,5 +10,9 @@ export default defineConfig({
       "@/src": path.resolve(__dirname, "./src"),
       "@/types": path.resolve(__dirname, "./@types")
     }
+  },
+  server:{
+    port:5173,
+    host:true
   }
 })

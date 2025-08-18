@@ -19,6 +19,11 @@ import EditResumeManager from "../pages/resumeManager/editResumeManager"
 import PersonalProfile from "../pages/PersonalProfile"
 import Analytics from "../pages/Analytics"
 import InterviewGuide from "../pages/InterviewGuide"
+import LiveInterview from "../pages/InterviewCopilot/LiveInterview"
+import AddYourResume from "../pages/InterviewCopilot/AddYourResume"
+import AddYourPosition from "../pages/InterviewCopilot/AddYourPosition"
+
+
 import ChosseResumeMake from "../pages/resumeBuilder/ChoseResumeMake"
 import CreateResumeBuilder from "../pages/resumeBuilder/CreateResumeBuilder"
 import ChooseTemplateCreateResume from "../pages/resumeBuilder/chooseTemplateCreateResume"
@@ -191,6 +196,18 @@ const AppRouter = () => {
         <Route
           path="/interview-Guide"
           element={<PrivateRoute element={<InterviewGuide />} />}
+        />
+        <Route
+          path="/live-interview"
+          element={<PrivateRoute element={<LiveInterview />} />}
+        />
+        <Route
+          path="/add-your-resume"
+          element={<PrivateRoute element={<AddYourResume />} />}
+        />
+        <Route
+          path="/add-your-position"
+          element={<PrivateRoute element={<AddYourPosition />} />}
         />
         <Route
           path="/resume-manager/editResume"
