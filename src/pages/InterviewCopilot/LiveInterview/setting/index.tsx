@@ -3,6 +3,8 @@ import { useState } from "react"
 import Permission from "./Permission"
 import Copilot from "./Copilot"
 import AdditionalContext from "./AdditionalContext"
+import ArrowDown from "@/src/assets/dashboardIcons/arrowDown.svg"
+
 
 const Setting = () => {
   const [selectedOption, setSelectedOption] = useState("Permission")
@@ -11,7 +13,7 @@ const Setting = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-6 justify-start w-[40%]">
+      <div className="flex flex-col gap-6 justify-start">
         <p className="font-bold text-3xl mb-3">Settings</p>
         <div className="flex gap-4 justify-start">
           {options.map((option) => {
@@ -34,7 +36,7 @@ const Setting = () => {
         
         {selectedOption === "Permission" && <Permission />}
         {selectedOption === "Copilot" && <Copilot />}
-        {selectedOption === "AdditionalContext" && <AdditionalContext />}
+        {selectedOption === "Additional Context" && <AdditionalContext />}
       </div>
     </>
   )

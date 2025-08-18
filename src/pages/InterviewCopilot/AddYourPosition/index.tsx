@@ -282,7 +282,7 @@ const AddYourPosition = () => {
               </Button>
               <Button
                 onClick={handleCloseModal}
-                className="p-2 px-4 text-white rounded bg-[#454545]"
+                className="p-2 px-4 text-white rounded hover:bg-[#29292b]"
               >
                 <span> Cancel </span>
               </Button>

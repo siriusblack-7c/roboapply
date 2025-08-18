@@ -51,7 +51,7 @@ const Copilot = () => {
   }
 
   return (
-    <div className="flex flex-col gap-6 px-8 py-6 bg-[#313131] rounded-lg">
+    <div className="flex flex-col gap-6 px-8 py-6 bg-[#313131] rounded-lg  w-[40%]">
       <div className="flex flex-col gap-2">
         <p className="font-semibold text-lg">Verbosity</p>
         <p className="text-[#CCCCCC]">
