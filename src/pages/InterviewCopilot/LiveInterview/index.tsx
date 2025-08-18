@@ -23,6 +23,8 @@ const LiveInterview = () => {
   const [isInterviewModalVisible, setInterviewModalVisible] = useState(false)
   const [isSessionLoading, setSessionLoading] = useState(false)
   const [isSettingVisible, setSettingVisible] = useState(false)
+  const [interviewType, setInterviewType] = useState("live-interview")
+  const [specialization, setSpecialization] = useState("");
 
   const items = [
     {
@@ -67,11 +69,17 @@ const LiveInterview = () => {
     setFirstTabActive(false)
   }
 
-  const handleMockupInterview = () => {}
+  const handleMockupInterview = () => {
+    setInterviewType("mock-interview");
+    setSpecialization("Mock Interview")
+    setInterviewModalVisible(true);
+  }
 
   const handleSpecializationSelect = (specialization) => {
     if (specialization === "General") {
       setInterviewModalVisible(true)
+    setSpecialization("General")
+
     }
     if (specialization === "Coding Copilot") {
       setSessionLoading(true)
@@ -101,7 +109,7 @@ const LiveInterview = () => {
                 {/*  */}
 
                 {isSettingVisible ? (
-                  <Setting/>
+                  <Setting />
                 ) : (
                   <>
                     <p className="font-bold text-3xl mb-3">Interviews</p>
@@ -157,14 +165,24 @@ const LiveInterview = () => {
                       <div className="flex w-fit gap-4 p-2 rounded-lg">
                         <Button
                           onClick={handleMockupInterview}
-                          className="p-3 px-5 flex items-center whitespace-nowrap space-x-2 max-w-full text-primary min-w-max text-navbar font-bold rounded-lg bg-[#454545] border border-[#404040]">
+                          className={`p-3 px-5 flex items-center whitespace-nowrap space-x-2 max-w-full text-primary min-w-max text-navbar font-bold rounded-lg ${
+                            interviewType === "mock-interview"
+                              ? "bg-gradient-to-b from-gradientStart to-gradientEnd hover:ring-2 hover:ring-gradientEnd focus:ring-2 focus:ring-gradientEnd"
+                              : "bg-[#454545] border border-[#404040]"
+                          } `}>
                           <PlusOutlined /> <span> Mock Interview </span>
                         </Button>
                         <Dropdown
                           menu={{ items }}
                           trigger={["click"]}
                           placement="bottomRight">
-                          <Button className="p-3 px-5 flex items-center whitespace-nowrap space-x-2 max-w-full text-primary min-w-max text-navbar font-bold rounded-lg bg-gradient-to-b from-gradientStart to-gradientEnd hover:ring-2 hover:ring-gradientEnd focus:ring-2 focus:ring-gradientEnd">
+                          <Button
+                            className={`p-3 px-5 flex items-center whitespace-nowrap space-x-2 max-w-full text-primary min-w-max text-navbar font-bold rounded-lg  ${
+                              interviewType === "live-interview"
+                                ? "bg-gradient-to-b from-gradientStart to-gradientEnd hover:ring-2 hover:ring-gradientEnd focus:ring-2 focus:ring-gradientEnd"
+                                : "bg-[#454545] border border-[#404040]"
+                            } `}
+                            onClick={() => setInterviewType("live-interview")}>
                             <PlusOutlined /> <span>Live Interview</span>
                             <DownOutlined />
                           </Button>
@@ -196,7 +214,8 @@ const LiveInterview = () => {
 
       {isInterviewModalVisible && (
         <InterviewModal
-          handleInterviewModalVisible={() => setInterviewModalVisible(true)}
+          specialization={specialization}
+          handleInterviewModalVisible={(value) => setInterviewModalVisible(value)}
           cancel={handleCancel}
         />
       )}

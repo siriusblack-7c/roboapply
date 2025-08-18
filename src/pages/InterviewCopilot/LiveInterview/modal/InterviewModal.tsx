@@ -6,22 +6,24 @@ import Upgrade from "@/src/assets/upgradeIcon.svg"
 import moment from "moment"
 
 interface InterviewModalProps {
+  specialization: string
   handleInterviewModalVisible: (visible: boolean) => void
   cancel: () => void
 }
 
 const InterviewModal = ({
+  specialization,
   handleInterviewModalVisible,
   cancel
 }: InterviewModalProps) => {
   const [selectedResume, setSelectedResume] = useState("")
   const [selectedRole, setSelectedRole] = useState("")
-  const [additionalContext, setAdditionalContext] = useState("")
+  const [selectedSpecialization, setSelectedSpecialization] =
+    useState(specialization)
   const [scheduleType, setScheduleType] = useState("immediately")
   const [scheduleDateTime, setScheduleDateTime] = useState(null)
   const [timeZone, setTimeZone] = useState("UTC-07:00 America/Los_Angeles")
-  const [selectedSpecialization, setSelectedSpecialization] = useState("General")
-  
+  const [additionalContext, setAdditionalContext] = useState("")
 
   const handleLaunch = () => {
     // Handle launch logic here
@@ -33,16 +35,14 @@ const InterviewModal = ({
     handleInterviewModalVisible(false)
   }
 
-    
-  
-    const handleScheduleTypeChange = (type) => {
-      setScheduleType(type)
-      if (type === "datetime") {
-        setScheduleDateTime(moment()) // Default to current time
-      } else {
-        setScheduleDateTime(null)
-      }
+  const handleScheduleTypeChange = (type) => {
+    setScheduleType(type)
+    if (type === "datetime") {
+      setScheduleDateTime(moment()) // Default to current time
+    } else {
+      setScheduleDateTime(null)
     }
+  }
 
   const handleModalCancel = () => {
     cancel()
@@ -67,7 +67,7 @@ const InterviewModal = ({
         </div>
         <div className="space-y-4">
           <div>
-            <label className="text-[#CCCCCC] block mb-1">
+            <label className="text-[#CCCCCC] block mb-3">
               {" "}
               <b>Resume</b> <span className="text-sm">optional</span>
             </label>
@@ -87,7 +87,7 @@ const InterviewModal = ({
             />
           </div>
           <div>
-            <label className="text-[#CCCCCC] block mb-1">
+            <label className="text-[#CCCCCC] block mb-3">
               <b>Role</b> <span className="text-sm">optional</span>
             </label>
             <Select
@@ -109,7 +109,7 @@ const InterviewModal = ({
             />
           </div>
           <div>
-            <div className="flex justify-between text-center">
+            <div className="flex justify-between items-center text-center mb-3">
               <label className="text-[#CCCCCC] block mb-1">
                 <b>Specialization (S)</b>
                 <span className="text-sm"> optional</span>
@@ -125,14 +125,16 @@ const InterviewModal = ({
               className="w-full text-white bg-[#454545] rounded"
               value={selectedSpecialization}
               onChange={setSelectedSpecialization}
-              options={[{ label: "General", value: "General" }]}
-              disabled
+              options={[
+                { label: "General", value: "General" },
+                { label: "Mock Interview", value: "mock" }
+              ]}
             />
           </div>
           <div>
-            <div className="flex justify-between text-center">
-              <label className="text-white font-bold block mb-1">
-                Additional Context
+            <div className="flex justify-between items-center text-center mb-3">
+              <label className="text-white block mb-1">
+                <b>Additional Context</b>
               </label>
               <p className="text-white text-sm flex items-center">
                 <span>Upgrade Saved Context</span>
