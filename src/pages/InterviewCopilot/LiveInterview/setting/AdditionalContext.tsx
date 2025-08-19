@@ -14,12 +14,13 @@ const AdditionalContext = () => {
   }
 
   const handleConfirm = () => {
-    setContextList((prev) => [...prev, additionalContextTemp])
-    setVisibleContextCreation(false)
-    setAdditionalContextTemp("")
+    setVisibleContextCreation(false);
   }
 
   const saveContextList = () => {
+    setContextList((prev) => [...prev, additionalContextTemp])
+    console.log("additionalContextTemp => ", additionalContextTemp)
+    console.log("contextList => ", contextList)
 
   }
 
