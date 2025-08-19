@@ -7,6 +7,7 @@ import Delete from "@/src/assets/delete.svg"
 import ViewEye from "@/src/assets/view_eye.svg"
 import { PlusOutlined, FilePdfOutlined } from "@ant-design/icons"
 import CircularIndeterminate from "../../../components/loader/circular"
+import { errorToast } from "@/src/components/Toast"
 
 const AddYourResume = () => {
   const [loadingLoader, setLoadingLoader] = useState(false)
@@ -27,7 +28,7 @@ const AddYourResume = () => {
         }
         setFiles((prev) => [...prev, newFile])
       } else {
-        alert("Only PDF files are allowed!")
+        errorToast("Only PDF files are allowed!")
       }
     })
   }
@@ -54,7 +55,7 @@ const AddYourResume = () => {
         }
         setFiles((prev) => [...prev, newFile])
       } else {
-        alert("Only PDF files are allowed!")
+        errorToast("Only PDF files are allowed!")
       }
     })
   }
@@ -134,7 +135,7 @@ const AddYourResume = () => {
                   {!files.length ? (
                     <Button
                       onClick={() => fileInputRef.current.click()}
-                      className="py-4 flex items-center space-x-2 w-fit justify-center text-xs md:text-xl font-semibold rounded-lg bg-none text-primary px-4"
+                      className="py-1 flex items-center space-x-2 w-fit justify-center text-xs md:text-xl font-semibold rounded-lg bg-none text-primary px-2"
                     >
                       <img src={Upload} />
                       <span>Drag to Upload</span>
